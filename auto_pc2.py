@@ -7,10 +7,7 @@ directorio_actual = os.getcwd()
 os.system('sudo apt install git')
 os.system('sudo apt install python3-pip')
 os.system('git clone https://github.com/CDPS-ETSIT/practica_creativa2.git')
-os.system('cd practica_creativa2/bookinfo/src/productpage')
-os.system('pip3 install -r requirements.txt')
-
-
+os.system('pip3 install -r practica_creativa2/bookinfo/src/productpage/requirements.txt')
 
 numGrupo = os.environ.get('GRUPO_NUMERO')
 
@@ -32,3 +29,4 @@ sust_line()
 
     
 os.system('python3 productpage_monolith.py 9080')
+
