@@ -14,6 +14,7 @@ os.system('pip3 install -r requirements.txt')
 
 numGrupo = os.environ.get('GRUPO_NUMERO')
 
+
 def sust_line():
     my_file = open('practica_creativa2\bookinfo\src\productpage\templates\index.html','r')
     lines = my_file.readlines()
@@ -26,6 +27,7 @@ def sust_line():
     my_file.writelines(lines)
     my_file.close()
 
+sust_line()
 
 
     
