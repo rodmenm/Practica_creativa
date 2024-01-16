@@ -1,6 +1,6 @@
 import sys, os, json, logging
 
-os.environ['GRUPO_NUMERO'] = '32'
+os.environ['GRUPO_NUMERO'] = 'G32'
 directorio_actual = os.getcwd()
 
 #Parte 1
