@@ -150,6 +150,33 @@ EXPOSE 9080
 # Comando por defecto al iniciar el contenedor                     
 CMD node /opt/microservices/ratings.js 9080
 """)
+    Dockerfile.close()
+    os.system('docker build -t '+numGrupo+'/ratings ./node/Dockerfile')
+    
+def yamnl():
+    Dockercomp = open('docker-compose','w')
+    Dockercomp.write("""
+version: '3'
+services:
+    app:
+        image: """+numGrupo+"""/product-page
+        ports:
+        - "9080":
+    app:
+        image: """+numGrupo+"""/details
+        ports:
+        - "9080":
+    app:
+        image: """+numGrupo+"""/reviews
+        ports:
+        - "9080":
+    app:
+        image: """+numGrupo+"""/ratings
+        ports:
+        - "9080":
+
+""")
+    Dockercomp.close()
 
 
 def Dockercompose():
@@ -157,6 +184,7 @@ def Dockercompose():
     ruby()
     java()
     node()
+    yamnl()
 
 
 if len(sys.argv) != 2:
