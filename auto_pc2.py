@@ -76,8 +76,24 @@ CMD python3 script.py ; python3 practica_creativa2/bookinfo/src/productpage/prod
     os.system('docker build -t '+numGrupo+'/product-page .')
     os.system('docker run --name '+numGrupo+'-product-page -p 9080:9080 -e GRUPO_NUMERO='+numGrupo+' '+numGrupo+'/product-page')
 
+#Parte Docker-compose
+def python():
+    os.mkdir("python")
     
+def ruby():
+    os.mkdir("ruby")
 
+def java():
+    os.mkdir("java")
+
+def node():
+    os.mkdir("node")
+
+def Dockercompose():
+    python()
+    ruby()
+    java()
+    node()
 
 
 if len(sys.argv) != 2:
@@ -87,5 +103,9 @@ else:
         MVPesada()
     elif (comand =="docker"):
         Docker()
+    elif (comand =="dockercompose"):
+        Dockercompose()
+    elif (comand == "help"):
+        print('Los posibles argumentos son "MVPesada","docker","dockercompose" ')
 
 
