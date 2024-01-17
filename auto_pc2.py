@@ -72,7 +72,7 @@ EXPOSE 9080
 CMD ["python", "python3 practica_creativa2/bookinfo/src/productpage/productpage_monolith.py 9080"]""")
     Dockerfile.close()
 
-    os.system('docker build '+numGrupo+'/product-page .')
+    os.system('docker build '+numGrupo+'-product-page .')
     os.system('docker run --name '+numGrupo+'-product-page -p 9080:9080 -e GROUPO_NUMERO='+numGrupo+' -d '+numGrupo+'/product-page')
 
     
