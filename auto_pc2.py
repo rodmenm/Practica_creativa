@@ -59,7 +59,8 @@ FROM python:3.7.7-slim
 COPY script.py script.py
 
 # Actualizamos el sistema e corremos los comandos
-RUN apt-get update 
+RUN apt-get update && \
+    apt-get install -y git
 RUN git clone https://github.com/CDPS-ETSIT/practica_creativa2.git
 RUN pip3 install -r practica_creativa2/bookinfo/src/productpage/requirements.txt
 RUN python script.py
