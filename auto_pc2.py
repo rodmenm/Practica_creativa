@@ -38,6 +38,7 @@ def Docker():
 import os
 
 numGrupo = os.environ.get('GRUPO_NUMERO')
+print(numGrupo)
 my_file = open('practica_creativa2/bookinfo/src/productpage/templates/index.html','r')
 lines = my_file.readlines()
 my_file.close()
@@ -63,13 +64,14 @@ RUN apt-get update && \
     apt-get install -y git
 RUN git clone https://github.com/CDPS-ETSIT/practica_creativa2.git
 RUN pip3 install -r practica_creativa2/bookinfo/src/productpage/requirements.txt
-RUN python script.py
                      
 # Exponemos el puerto 9080
 EXPOSE 9080
 
 # Comando por defecto al iniciar el contenedor                     
-CMD ["python", "python3 practica_creativa2/bookinfo/src/productpage/productpage_monolith.py 9080"]""")
+CMD ["python3", "script.py", "&&", "python", "practica_creativa2/bookinfo/src/productpage/productpage_monolith.py", "9080"]
+
+""")
     Dockerfile.close()
 
     os.system('docker build -t '+numGrupo+'-product-page .')
