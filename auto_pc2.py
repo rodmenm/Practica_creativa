@@ -60,7 +60,7 @@ COPY script.py script.py
 
 # Actualizamos el sistema e corremos los comandos
 RUN apt-get update 
-RUN sudo apt install git
+RUN apt install git
 RUN git clone https://github.com/CDPS-ETSIT/practica_creativa2.git
 RUN pip3 install -r practica_creativa2/bookinfo/src/productpage/requirements.txt
 RUN python script.py
@@ -72,7 +72,7 @@ EXPOSE 9080
 CMD ["python", "python3 practica_creativa2/bookinfo/src/productpage/productpage_monolith.py 9080"]""")
     Dockerfile.close()
 
-    os.system('docker build -t '+numGrupo+'/product-page:etiqueta .')
+    os.system('docker build '+numGrupo+'/product-page .')
     os.system('docker run --name '+numGrupo+'-product-page -p 9080:9080 -e GROUPO_NUMERO='+numGrupo+' -d '+numGrupo+'/product-page')
 
     
