@@ -151,7 +151,7 @@ CMD node /opt/microservices/ratings.js 9080
     os.system('docker build -t '+numGrupo+'/ratings .')
     
 def yamnl():
-    Dockercomp = open('docker-compose','w')
+    Dockercomp = open('docker-compose.yml','w')
     Dockercomp.write("""
 version: '3'
 services:
