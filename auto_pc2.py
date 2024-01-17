@@ -68,7 +68,7 @@ RUN pip3 install -r practica_creativa2/bookinfo/src/productpage/requirements.txt
 EXPOSE 9080
 
 # Comando por defecto al iniciar el contenedor                     
-CMD ["python3", "script.py", "&&", "python3", "practica_creativa2/bookinfo/src/productpage/productpage_monolith.py", "9080"]
+CMD ["python3", "script.py ; python3 practica_creativa2/bookinfo/src/productpage/productpage_monolith.py 9080"]
 
 """)
     Dockerfile.close()
