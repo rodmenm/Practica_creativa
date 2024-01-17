@@ -75,7 +75,7 @@ CMD ["python3", "script.py", "&&", "python", "practica_creativa2/bookinfo/src/pr
     Dockerfile.close()
 
     os.system('docker build -t '+numGrupo+'/product-page .')
-    os.system('docker run --name '+numGrupo+'-product-page -p 9080:9080 -e GRUPO_NUMERO='+numGrupo+' -d '+numGrupo+'/product-page')
+    os.system('docker run --name '+numGrupo+'-product-page -p 9080:9080 -e GRUPO_NUMERO='+numGrupo+' '+numGrupo+'/product-page')
 
     
 
