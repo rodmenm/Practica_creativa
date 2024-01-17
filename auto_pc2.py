@@ -6,6 +6,9 @@ directorio_actual = os.getcwd()
 if sys.argv[1]:
     comand = sys.argv[1]
 
+os.system('git clone https://github.com/CDPS-ETSIT/practica_creativa2.git')
+
+
 def sust_line():
     my_file = open('practica_creativa2/bookinfo/src/productpage/templates/index.html','r')
     lines = my_file.readlines()
@@ -20,7 +23,7 @@ def sust_line():
     my_file.writelines(lines)
     my_file.close()
 
-#Parte MV Pesada
+#Parte MV Pesada--------------------------------------------------------------------------------------------------------------------------------------------
 def MVPesada():   
     os.system('sudo apt install git')
     os.system('sudo apt install python3-pip')
@@ -31,7 +34,7 @@ def MVPesada():
 
     os.system('python3 practica_creativa2/bookinfo/src/productpage/productpage_monolith.py 3200')
 
-#Parte Docker
+#Parte Docker---------------------------------------------------------------------------------------------------------------------------------------------
 def Docker():
     script = open('script.py','w')
     script.write("""
@@ -76,12 +79,52 @@ CMD python3 script.py ; python3 practica_creativa2/bookinfo/src/productpage/prod
     os.system('docker build -t '+numGrupo+'/product-page .')
     os.system('docker run --name '+numGrupo+'-product-page -p 9080:9080 -e GRUPO_NUMERO='+numGrupo+' '+numGrupo+'/product-page')
 
-#Parte Docker-compose
+#Parte Docker-compose-----------------------------------------------------------------------------------------------------------------------------------------
 def python():
     os.mkdir("python")
+    Dockerfile = open('./python/Dockerfile','w')
+    Dockerfile.write("""
+# Elegimos imagen con FROM
+FROM python:3.7.7-slim
+                     
+# Actualizamos el sistema e corremos los comandos
+RUN apt-get update && \
+    apt-get install -y git
+RUN git clone https://github.com/CDPS-ETSIT/practica_creativa2.git
+RUN pip3 install -r practica_creativa2/bookinfo/src/productpage/requirements.txt
+                     
+# Exponemos el puerto 9080
+EXPOSE 9080
+                     
+# Comando por defecto al iniciar el contenedor                     
+CMD python3 practica_creativa2/bookinfo/src/productpage/productpage.py 9080
+
+""")
+    Dockerfile.close()
+    os.system('docker build -t '+numGrupo+'/product-page .')
     
 def ruby():
     os.mkdir("ruby")
+    Dockerfile = open('./python/Dockerfile','w')
+    Dockerfile.write("""
+# Elegimos imagen con FROM
+FROM ruby:2.7.1-slim
+                     
+# Definir variables de entorno
+ENV SERVICE_VERSION=true \
+    ENABLE_EXTERNAL_BOOK_SERVICE=true
+                     
+# Copiamos el script de inicio al directorio de trabajo
+COPY practica_creativa2/bookinfo/src/details/details.rb /opt/microservices/details.rb
+                     
+# Exponemos el puerto 9080
+EXPOSE 9080
+                     
+# Comando por defecto al iniciar el contenedor                     
+CMD ruby /opt/microservices/details.rb 9080
+""")
+    Dockerfile.close()
+    os.system('docker build -t '+numGrupo+'/details .')
 
 def java():
     os.mkdir("java")
