@@ -81,8 +81,7 @@ CMD python3 script.py ; python3 practica_creativa2/bookinfo/src/productpage/prod
 
 #Parte Docker-compose-----------------------------------------------------------------------------------------------------------------------------------------
 def python():
-    os.mkdir("python")
-    Dockerfile = open('./python/Dockerfile','w')
+    Dockerfile = open('Dockerfile','w')
     Dockerfile.write("""
 # Elegimos imagen con FROM
 FROM python:3.7.7-slim
@@ -101,11 +100,10 @@ CMD python3 practica_creativa2/bookinfo/src/productpage/productpage.py 9080
 
 """)
     Dockerfile.close()
-    os.system('docker build -t '+numGrupo+'/product-page ./python/Dockerfile')
+    os.system('docker build -t '+numGrupo+'/product-page .')
     
 def ruby():
-    os.mkdir("ruby")
-    Dockerfile = open('./ruby/Dockerfile','w')
+    Dockerfile = open('Dockerfile','w')
     Dockerfile.write("""
 # Elegimos imagen con FROM
 FROM ruby:2.7.1-slim
@@ -124,22 +122,21 @@ EXPOSE 9080
 CMD ruby /opt/microservices/details.rb 9080
 """)
     Dockerfile.close()
-    os.system('docker build -t '+numGrupo+'/details ./ruby/Dockerfile')
+    os.system('docker build -t '+numGrupo+'/details .')
 
 def java():
     os.system('cd practica_creativa2/bookinfo/src/reviews && docker run --rm -u root -v "$(pwd)":/home/gradle/project -w /home/gradle/project gradle:4.8.1 gradle clean build')
-    os.system('docker build -t '+numGrupo+'/reviews ./practica_creativa2\bookinfo\src\reviews\reviews-wlpcfg\Dockerfile')
+    os.system('docker build -t '+numGrupo+'/reviews ./practica_creativa2\bookinfo\src\reviews\reviews-wlpcfg')
 
 def node():
-    os.mkdir("node")
-    Dockerfile = open('./node/Dockerfile','w')
+    Dockerfile = open('Dockerfile','w')
     Dockerfile.write("""
 # Elegimos imagen con FROM
 FROM node:12.18.1-slim
                      
 # Copiamos el script de inicio al directorio de trabajo
-COPY ./practica_creativa2/bookinfo/src/ratings/package.json /opt/microservices/package.json
-COPY ./practica_creativa2/bookinfo/src/ratings/ratings.js /opt/microservices/ratings.js
+COPY practica_creativa2/bookinfo/src/ratings/package.json /opt/microservices/package.json
+COPY practica_creativa2/bookinfo/src/ratings/ratings.js /opt/microservices/ratings.js
 
 # Definir variables de entorno
 ENV SERVICE_VERSION=v1 
@@ -151,7 +148,7 @@ EXPOSE 9080
 CMD node /opt/microservices/ratings.js 9080
 """)
     Dockerfile.close()
-    os.system('docker build -t '+numGrupo+'/ratings ./node/Dockerfile')
+    os.system('docker build -t '+numGrupo+'/ratings .')
     
 def yamnl():
     Dockercomp = open('docker-compose','w')
