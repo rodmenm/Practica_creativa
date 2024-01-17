@@ -1,9 +1,10 @@
 import sys, os, json, logging
 
-os.environ['GRUPO_NUMERO'] = 'G32'
+os.environ['GRUPO_NUMERO'] = 'g32'
 numGrupo = os.environ.get('GRUPO_NUMERO')
 directorio_actual = os.getcwd()
-comand = sys.argv[1]
+if sys.argv[1]:
+    comand = sys.argv[1]
 
 def sust_line():
     my_file = open('practica_creativa2/bookinfo/src/productpage/templates/index.html','r')
@@ -85,6 +86,5 @@ else:
         MVPesada()
     elif (comand =="docker"):
         Docker()
-
 
 
