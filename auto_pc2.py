@@ -126,7 +126,7 @@ CMD ruby /opt/microservices/details.rb 9080
 
 def java():
     os.system('cd practica_creativa2/bookinfo/src/reviews && docker run --rm -u root -v "$(pwd)":/home/gradle/project -w /home/gradle/project gradle:4.8.1 gradle clean build')
-    os.system('docker build -t '+numGrupo+'/reviews ./practica_creativa2\bookinfo\src\reviews\reviews-wlpcfg')
+    os.system('docker build -t '+numGrupo+'/reviews ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
 
 def node():
     Dockerfile = open('Dockerfile','w')
