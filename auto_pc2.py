@@ -101,11 +101,11 @@ CMD python3 practica_creativa2/bookinfo/src/productpage/productpage.py 9080
 
 """)
     Dockerfile.close()
-    os.system('docker build -t '+numGrupo+'/product-page .')
+    os.system('docker build -t '+numGrupo+'/product-page ./python/Dockerfile')
     
 def ruby():
     os.mkdir("ruby")
-    Dockerfile = open('./python/Dockerfile','w')
+    Dockerfile = open('./ruby/Dockerfile','w')
     Dockerfile.write("""
 # Elegimos imagen con FROM
 FROM ruby:2.7.1-slim
@@ -124,13 +124,33 @@ EXPOSE 9080
 CMD ruby /opt/microservices/details.rb 9080
 """)
     Dockerfile.close()
-    os.system('docker build -t '+numGrupo+'/details .')
+    os.system('docker build -t '+numGrupo+'/details ./ruby/Dockerfile')
 
 def java():
-    os.mkdir("java")
+    os.system('cd practica_creativa2/bookinfo/src/reviews && docker run --rm -u root -v "$(pwd)":/home/gradle/project -w /home/gradle/project gradle:4.8.1 gradle clean build')
+    os.system('docker build -t '+numGrupo+'/reviews ./practica_creativa2\bookinfo\src\reviews\reviews-wlpcfg\Dockerfile')
 
 def node():
     os.mkdir("node")
+    Dockerfile = open('./node/Dockerfile','w')
+    Dockerfile.write("""
+# Elegimos imagen con FROM
+FROM node:12.18.1-slim
+                     
+# Copiamos el script de inicio al directorio de trabajo
+COPY ./practica_creativa2/bookinfo/src/ratings/package.json /opt/microservices/package.json
+COPY ./practica_creativa2/bookinfo/src/ratings/ratings.js /opt/microservices/ratings.js
+
+# Definir variables de entorno
+ENV SERVICE_VERSION=v1 
+                                          
+# Exponemos el puerto 9080
+EXPOSE 9080
+                     
+# Comando por defecto al iniciar el contenedor                     
+CMD node /opt/microservices/ratings.js 9080
+""")
+
 
 def Dockercompose():
     python()
