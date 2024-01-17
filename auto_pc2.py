@@ -158,19 +158,19 @@ def yamnl():
     Dockercomp.write("""
 version: '3'
 services:
-    app:
+    product-page:
         image: """+numGrupo+"""/product-page
         ports:
         - "9080":
-    app:
+    details:
         image: """+numGrupo+"""/details
         ports:
         - "9080":
-    app:
+    reviews:
         image: """+numGrupo+"""/reviews
         ports:
         - "9080":
-    app:
+    ratings:
         image: """+numGrupo+"""/ratings
         ports:
         - "9080":
