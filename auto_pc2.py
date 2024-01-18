@@ -206,6 +206,18 @@ def Dockercompose(version):
 
 #Parte Kubernetes--------------------------------------------------------------------------------------------------------------------
 def kubernetes():
+    python()
+    ruby()
+    java()
+    node()
+    os.system("docker tag g32/ratings rmenendez8/ratings")
+    os.system("docker tag g32/reviews rmenendez8/reviews")
+    os.system("docker tag g32/product-page rmenendez8/product-page")
+    os.system("docker tag g32/details rmenendez8/details")
+    os.system("docker push rmenendez8/ratings")
+    os.system("docker push rmenendez8/reviews")
+    os.system("docker push rmenendez8/product-page")
+    os.system("docker push rmenendez8/details")
 
 
 
