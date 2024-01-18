@@ -167,6 +167,8 @@ services:
         image: """+numGrupo+"""/reviews
     ratings:
         image: """+numGrupo+"""/ratings
+        environment:
+        - enable_ratings=true
         ports:
         - "9082:9080"
 
