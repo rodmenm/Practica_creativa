@@ -138,8 +138,11 @@ FROM node:12.18.1-slim
 COPY practica_creativa2/bookinfo/src/ratings/package.json /opt/microservices/package.json
 COPY practica_creativa2/bookinfo/src/ratings/ratings.js /opt/microservices/ratings.js
 
+# Corremos el comando
+RUN npm install
+
 # Definir variables de entorno
-ENV SERVICE_VERSION=v2 
+ENV SERVICE_VERSION=v1 
                                           
 # Exponemos el puerto 9080
 EXPOSE 9080
