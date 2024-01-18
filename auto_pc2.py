@@ -23,6 +23,29 @@ def sust_line():
     my_file.writelines(lines)
     my_file.close()
 
+def sust_line2(userb):
+    my_file = open('ratings.yaml','r')
+    lines = my_file.readlines()
+    my_file.close()
+
+    del lines[38]
+    lines.insert(38, '        image: '+userb+'/ratings')
+    
+    my_file = open('ratings.yaml','w')
+    my_file.writelines(lines)
+    my_file.close()
+
+    my_fileb = open('reviews.yaml.yaml','r')
+    lines = my_fileb.readlines()
+    my_fileb.close()
+
+    del lines[21]
+    lines.insert(21, '        image: '+userb+'/reviews')
+    
+    my_fileb = open('reviews.yaml.yaml','w')
+    my_fileb.writelines(lines)
+    my_fileb.close()
+
 #Parte MV Pesada--------------------------------------------------------------------------------------------------------------------------------------------
 def MVPesada():   
     os.system('sudo apt install git')
@@ -219,6 +242,11 @@ def kubernetes_comit(user):
     os.system("docker push "+user+"/product-page")
     os.system("docker push "+user+"/details")
 
+def kubernetes_create(user):
+    os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-svc.yaml .")
+    os.system("cp practica_creativa2/bookinfo/platform/kube/ratings.yaml .")
+    os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-v1-deployment.yaml reviews.yaml")
+    sust_line2(user)
 
 
 
