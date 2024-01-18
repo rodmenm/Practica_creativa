@@ -156,7 +156,7 @@ CMD node /opt/microservices/ratings.js 9080
     Dockerfile.close()
     os.system('docker build -t '+numGrupo+'/ratings .')
     
-def yamnl():
+def yamnl(version,rating,star):
     Dockercomp = open('docker-compose.yml','w')
     Dockercomp.write("""
 version: '3'
@@ -172,9 +172,9 @@ services:
     reviews:
         image: """+numGrupo+"""/reviews
         environment:
-        - ENABLE_RATINGS=true
-        - SERVICE_VERSION=v2 
-        - STAR_COLOR=black
+        - ENABLE_RATINGS="""+rating+"""
+        - SERVICE_VERSION="""+version+"""
+        - STAR_COLOR="""+star+"""
     ratings:
         image: """+numGrupo+"""/ratings
         ports:
@@ -184,13 +184,29 @@ services:
     Dockercomp.close()
 
 
-def Dockercompose():
+def Dockercompose(version):
+
+    if (version == "v1"):
+        ratings = "false"
+    elif(version == "v2"):
+        ratings = "true"
+        star = "black"
+    elif(version == "v3"):
+        ratings = "true"
+        star = "red"
+    else:
+        print("Tomando version v1 por defeco")
     python()
     ruby()
     java()
     node()
-    yamnl()
+    yamnl(version,ratings,star)
 
+if (comand =="dockercompose"):
+    if (sys.argv[2]):
+        Dockercompose(sys.argv[2])
+    else:
+        Dockercompose('v1')
 
 if len(sys.argv) != 2:
     print('El número de argumentos no es correcto. Escriba "python3 productpage_monolith.py help" para ver los argumentos en correctos')
