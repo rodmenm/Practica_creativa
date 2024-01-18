@@ -158,19 +158,19 @@ services:
     product-page:
         image: """+numGrupo+"""/product-page
         ports:
-        - "9080"
+        - 9080:9080
     details:
         image: """+numGrupo+"""/details
         ports:
-        - "9080"
+        - 9080:9080
     reviews:
         image: """+numGrupo+"""/reviews
         ports:
-        - "9080"
+        - 9080:9080
     ratings:
         image: """+numGrupo+"""/ratings
         ports:
-        - "9080"
+        - 9080:9080
 
 """)
     Dockercomp.close()
