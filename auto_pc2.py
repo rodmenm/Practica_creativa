@@ -195,5 +195,7 @@ else:
         Dockercompose()
     elif (comand == "help"):
         print('Los posibles argumentos son "MVPesada","docker","dockercompose" ')
+    elif (comand == "kk"):
+        yamnl()
 
 
