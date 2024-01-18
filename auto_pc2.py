@@ -206,9 +206,7 @@ def Dockercompose(version):
 
 #Parte Kubernetes--------------------------------------------------------------------------------------------------------------------
 def kubernetes():
-    os.system("curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64")
-    os.system("sudo install minikube-linux-amd64 /usr/local/bin/minikube")
-    os.system("minikube start --nodes=5 --cpus=2 --memory=4096")
+
 
 
 
@@ -230,7 +228,11 @@ else:
     elif (comand =="kubernetes"):
         kubernetes()
     elif (comand == "help"):
-        print('Los posibles argumentos son "MVPesada","docker","dockercompose" ')
+        print('Escriba "python3 auto_pc2.py MVPesada" para desplegar la pagina en una MV pesada')
+        print('Escriba "python3 auto_pc2.py docker" para desplegar la pagina con docker')
+        print('Escriba "python3 auto_pc2.py dockercompose" para desplegar la pagina con docker-compose')
+        print('Escriba un 3 argumento tras dockercompose para elegir la version')
+        print('Escriba "python3 auto_pc2.py kubernetes" para desplegar la pagina con kubernetes')
 
 
 
