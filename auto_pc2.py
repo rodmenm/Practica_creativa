@@ -138,7 +138,10 @@ FROM node:12.18.1-slim
 COPY practica_creativa2/bookinfo/src/ratings/package.json /opt/microservices/package.json
 COPY practica_creativa2/bookinfo/src/ratings/ratings.js /opt/microservices/ratings.js
 
-# Corremos el comando
+# Establecemos el directorio de trabajo
+WORKDIR /opt/microservices
+
+# Corremos el comando en el directorio especificado
 RUN npm install
 
 # Definir variables de entorno
