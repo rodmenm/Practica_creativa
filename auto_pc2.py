@@ -3,7 +3,7 @@ import sys, os, json, logging
 os.environ['GRUPO_NUMERO'] = 'g32'
 numGrupo = os.environ.get('GRUPO_NUMERO')
 directorio_actual = os.getcwd()
-if sys.argv[1]:
+if len(sys.argv)>=2:
     comand = sys.argv[1]
 
 os.system('git clone https://github.com/CDPS-ETSIT/practica_creativa2.git')
@@ -202,23 +202,22 @@ def Dockercompose(version):
     java()
     node()
     yamnl(version,ratings,star)
+    os.system("docker-compose up")
 
 if (comand =="dockercompose"):
-    if (sys.argv[2]):
+    if (len(sys.argv)>=3):
         Dockercompose(sys.argv[2])
     else:
         print("Tomando por defecto la version v3")
         Dockercompose('v3')
-
-if len(sys.argv) != 2:
+        
+elif len(sys.argv) != 2:
     print('El número de argumentos no es correcto. Escriba "python3 productpage_monolith.py help" para ver los argumentos en correctos')
 else:
     if (comand == "MVPesada"):
         MVPesada()
     elif (comand =="docker"):
         Docker()
-    elif (comand =="dockercompose"):
-        Dockercompose()
     elif (comand == "help"):
         print('Los posibles argumentos son "MVPesada","docker","dockercompose" ')
 
