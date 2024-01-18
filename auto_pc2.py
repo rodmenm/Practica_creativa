@@ -205,31 +205,37 @@ def Dockercompose(version):
     os.system("docker-compose up")
 
 #Parte Kubernetes--------------------------------------------------------------------------------------------------------------------
-def kubernetes():
+def kubernetes_comit(user):
     python()
     ruby()
     java()
     node()
-    os.system("docker tag g32/ratings rmenendez8/ratings")
-    os.system("docker tag g32/reviews rmenendez8/reviews")
-    os.system("docker tag g32/product-page rmenendez8/product-page")
-    os.system("docker tag g32/details rmenendez8/details")
-    os.system("docker push rmenendez8/ratings")
-    os.system("docker push rmenendez8/reviews")
-    os.system("docker push rmenendez8/product-page")
-    os.system("docker push rmenendez8/details")
+    os.system("docker tag g32/ratings "+user+"/ratings")
+    os.system("docker tag g32/reviews "+user+"/reviews")
+    os.system("docker tag g32/product-page "+user+"/product-page")
+    os.system("docker tag g32/details "+user+"/details")
+    os.system("docker push "+user+"/ratings")
+    os.system("docker push "+user+"/reviews")
+    os.system("docker push "+user+"/product-page")
+    os.system("docker push "+user+"/details")
 
 
 
 
 #MAIN-------------------------------------------------------------------------------------------------------------------------------
 if (comand =="dockercompose"):
-    if (len(sys.argv)>=3):
+    if (len(sys.argv)==3):
         Dockercompose(sys.argv[2])
     else:
         print("Tomando por defecto la version v3")
-        Dockercompose('v3')
-        
+        Dockercompose('v3')     
+
+elif (comand =="kubernetescomit"):
+    if (len(sys.argv)==3):
+       kubernetes_comit(sys.argv[2])
+    else:
+        print('Logeate en docker empleando "docker login" y pasa a esta funcion tu nombre de usuario de esta forma "python3 auto_pc2.py kubernetescomit "tu_usuario" (sin comillas)')
+
 elif len(sys.argv) != 2:
     print('El número de argumentos no es correcto. Escriba "python3 productpage_monolith.py help" para ver los argumentos en correctos')
 else:
@@ -237,8 +243,7 @@ else:
         MVPesada()
     elif (comand =="docker"):
         Docker()
-    elif (comand =="kubernetes"):
-        kubernetes()
+
     elif (comand == "help"):
         print('Escriba "python3 auto_pc2.py MVPesada" para desplegar la pagina en una MV pesada')
         print('Escriba "python3 auto_pc2.py docker" para desplegar la pagina con docker')
