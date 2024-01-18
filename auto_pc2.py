@@ -139,7 +139,7 @@ COPY practica_creativa2/bookinfo/src/ratings/package.json /opt/microservices/pac
 COPY practica_creativa2/bookinfo/src/ratings/ratings.js /opt/microservices/ratings.js
 
 # Definir variables de entorno
-ENV SERVICE_VERSION=v1 
+ENV SERVICE_VERSION=v2 
                                           
 # Exponemos el puerto 9080
 EXPOSE 9080
@@ -165,10 +165,12 @@ services:
         - "9081:9080"
     reviews:
         image: """+numGrupo+"""/reviews
+        environment:
+        - ENABLE_RATINGS=true
+        - SERVICE_VERSION=v2 
+        - STAR_COLOR=black
     ratings:
         image: """+numGrupo+"""/ratings
-        environment:
-        - enable_ratings=true
         ports:
         - "9082:9080"
 
