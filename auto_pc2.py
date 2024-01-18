@@ -204,6 +204,15 @@ def Dockercompose(version):
     yamnl(version,ratings,star)
     os.system("docker-compose up")
 
+#Parte Kubernetes--------------------------------------------------------------------------------------------------------------------
+def kubernetes():
+    os.system("curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64")
+    os.system("sudo install minikube-linux-amd64 /usr/local/bin/minikube")
+    os.system("minikube start --nodes=5 --cpus=2 --memory=4096")
+
+
+
+#MAIN-------------------------------------------------------------------------------------------------------------------------------
 if (comand =="dockercompose"):
     if (len(sys.argv)>=3):
         Dockercompose(sys.argv[2])
@@ -218,6 +227,8 @@ else:
         MVPesada()
     elif (comand =="docker"):
         Docker()
+    elif (comand =="kubernetes"):
+        kubernetes()
     elif (comand == "help"):
         print('Los posibles argumentos son "MVPesada","docker","dockercompose" ')
 
