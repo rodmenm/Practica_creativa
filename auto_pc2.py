@@ -188,6 +188,7 @@ def Dockercompose(version):
 
     if (version == "v1"):
         ratings = "false"
+        star = "black"
     elif(version == "v2"):
         ratings = "true"
         star = "black"
@@ -206,7 +207,8 @@ if (comand =="dockercompose"):
     if (sys.argv[2]):
         Dockercompose(sys.argv[2])
     else:
-        Dockercompose('v1')
+        print("Tomando por defecto la version v3")
+        Dockercompose('v3')
 
 if len(sys.argv) != 2:
     print('El número de argumentos no es correcto. Escriba "python3 productpage_monolith.py help" para ver los argumentos en correctos')
