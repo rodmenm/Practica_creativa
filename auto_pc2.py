@@ -251,6 +251,18 @@ def kubernetes_create(user):
 
     prod = open('product-page.yaml','w')
     prod.write("""
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-page
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 9080
+      name: http
+      protocol: TCP
+      targetPort: 9080
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -270,19 +282,6 @@ spec:
         image: """+user+"""/product-page
         ports:
         - containerPort: 9080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: product-page
-spec:
-  type: LoadBalancer
-  ports:
-    - port: 9080
-      name: http
-      protocol: TCP
-      targetPort: 9080
-
 """)
     prod.close()
 
