@@ -278,8 +278,9 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - protocol: TCP
-      port: 9080
+    - port: 9080
+      name: http
+      protocol: TCP
       targetPort: 9080
 
 """)
