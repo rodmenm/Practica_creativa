@@ -37,14 +37,14 @@ def sust_line2(userb):
     my_file.writelines(lines)
     my_file.close()
 
-    my_fileb = open('reviews.yaml.yaml','r')
+    my_fileb = open('reviews.yaml','r')
     lines = my_fileb.readlines()
     my_fileb.close()
 
     del lines[21]
     lines.insert(21, '        image: '+userb+'/reviews')
     
-    my_fileb = open('reviews.yaml.yaml','w')
+    my_fileb = open('reviews.yaml','w')
     my_fileb.writelines(lines)
     my_fileb.close()
 
