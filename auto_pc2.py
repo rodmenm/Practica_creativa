@@ -254,7 +254,7 @@ def kubernetes_create(user):
 apiVersion: v1
 kind: Service
 metadata:
-  name: product-page
+  name: productpage
 spec:
   type: LoadBalancer
   ports:
@@ -266,19 +266,19 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: product-page
+  name: productpage
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: product-page
+      app: productpage
   template:
     metadata:
       labels:
-        app: product-page
+        app: productpage
     spec:
       containers:
-      - name: product-page
+      - name: productpage
         image: """+user+"""/product-page
         ports:
         - containerPort: 9080
