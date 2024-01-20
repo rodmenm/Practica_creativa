@@ -288,6 +288,18 @@ spec:
 
     det = open ('details.yalm','w')
     det.write("""
+apiVersion: v1
+kind: Service
+metadata:
+  name: details
+spec:
+  selector:
+    app: details
+  ports:
+    - protocol: TCP
+      port: 9080
+      targetPort: 9080
+---              
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -307,19 +319,6 @@ spec:
         image: """+user+"""/details
         ports:
         - containerPort: 9080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: details
-spec:
-  selector:
-    app: details
-  ports:
-    - protocol: TCP
-      port: 9080
-      targetPort: 9080
-
 """)
     
     det.close()
