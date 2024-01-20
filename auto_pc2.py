@@ -326,9 +326,9 @@ spec:
 
     sust_line2(user)
 
-    os.system('kubectl apply -f  reviews-svc.yaml')
-    os.system('kubectl apply -f  ratings.yaml')
-    os.system('kubectl apply -f  reviews.yaml')
+    os.system('kubectl apply -f reviews-svc.yaml')
+    os.system('kubectl apply -f ratings.yaml')
+    os.system('kubectl apply -f reviews.yaml')
     os.system('kubectl apply -f product-page.yaml')
     os.system('kubectl apply -f details.yalm')
 
@@ -354,7 +354,7 @@ elif (comand =="kubernetescreate"):
     if (len(sys.argv)==3):
        kubernetes_create(sys.argv[2])
     else:
-        print('Logeate en docker empleando "docker login" y pasa a esta funcion tu nombre de usuario de esta forma "python3 auto_pc2.py kubernetescomit "tu_usuario" (sin comillas)')
+        print('Escribe "python3 auto_pc2.py kubernetescomit "tu_usuario"" (sin comillas), para desplegarlo')
 
 
 elif len(sys.argv) != 2:
