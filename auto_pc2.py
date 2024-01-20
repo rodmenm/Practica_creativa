@@ -350,6 +350,13 @@ elif (comand =="kubernetescomit"):
     else:
         print('Logeate en docker empleando "docker login" y pasa a esta funcion tu nombre de usuario de esta forma "python3 auto_pc2.py kubernetescomit "tu_usuario" (sin comillas)')
 
+elif (comand =="kubernetescreate"):
+    if (len(sys.argv)==3):
+       kubernetes_create(sys.argv[2])
+    else:
+        print('Logeate en docker empleando "docker login" y pasa a esta funcion tu nombre de usuario de esta forma "python3 auto_pc2.py kubernetescomit "tu_usuario" (sin comillas)')
+
+
 elif len(sys.argv) != 2:
     print('El número de argumentos no es correcto. Escriba "python3 productpage_monolith.py help" para ver los argumentos en correctos')
 else:
