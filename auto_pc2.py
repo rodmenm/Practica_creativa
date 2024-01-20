@@ -326,6 +326,14 @@ spec:
 
     sust_line2(user)
 
+    os.system('kubectl apply -f  reviews-svc.yaml')
+    os.system('kubectl apply -f  ratings.yaml')
+    os.system('kubectl apply -f  reviews.yaml')
+    os.system('kubectl apply -f product-page.yaml')
+    os.system('kubectl apply -f details.yalm')
+
+    
+
 
 
 #MAIN-------------------------------------------------------------------------------------------------------------------------------
