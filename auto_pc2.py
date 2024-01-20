@@ -276,8 +276,7 @@ kind: Service
 metadata:
   name: product-page
 spec:
-  selector:
-    app: product-page
+  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 9080
