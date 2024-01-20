@@ -29,9 +29,9 @@ def sust_line2(userb):
     my_file.close()
 
     del lines[38]
-    lines.insert(38, '        image: '+userb+'/ratings')
+    lines.insert(38, '        image: '+userb+'/ratings\n')
     del lines[25]
-    lines.insert(25, '  replicas: 2')
+    lines.insert(25, '  replicas: 2\n')
     
     my_file = open('ratings.yaml','w')
     my_file.writelines(lines)
@@ -42,7 +42,7 @@ def sust_line2(userb):
     my_fileb.close()
 
     del lines[21]
-    lines.insert(21, '        image: '+userb+'/reviews')
+    lines.insert(21, '        image: '+userb+'/reviews\n')
     
     my_fileb = open('reviews.yaml','w')
     my_fileb.writelines(lines)
