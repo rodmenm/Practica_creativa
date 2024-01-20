@@ -30,6 +30,8 @@ def sust_line2(userb):
 
     del lines[38]
     lines.insert(38, '        image: '+userb+'/ratings')
+    del lines[25]
+    lines.insert(25, '  replicas: 2')
     
     my_file = open('ratings.yaml','w')
     my_file.writelines(lines)
@@ -246,6 +248,82 @@ def kubernetes_create(user):
     os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-svc.yaml .")
     os.system("cp practica_creativa2/bookinfo/platform/kube/ratings.yaml .")
     os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-v1-deployment.yaml reviews.yaml")
+
+    prod = open('product-page.yaml','w')
+    prod.write("""
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-page
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-page
+  template:
+    metadata:
+      labels:
+        app: product-page
+    spec:
+      containers:
+      - name: product-page
+        image: """+user+"""/product-page
+        ports:
+        - containerPort: 9080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-page
+spec:
+  selector:
+    app: product-page
+  ports:
+    - protocol: TCP
+      port: 9080
+      targetPort: 9080
+
+""")
+    prod.close()
+
+    det = open ('details.yalm','w')
+    det.write("""
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: details
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: details
+  template:
+    metadata:
+      labels:
+        app: details
+    spec:
+      containers:
+      - name: details
+        image: """+user+"""/details
+        ports:
+        - containerPort: 9080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: details
+spec:
+  selector:
+    app: details
+  ports:
+    - protocol: TCP
+      port: 9080
+      targetPort: 9080
+
+""")
+    
+    det.close()
+
     sust_line2(user)
 
 
