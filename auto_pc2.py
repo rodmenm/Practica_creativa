@@ -251,73 +251,102 @@ def kubernetes_create(user):
 
     prod = open('product-page.yaml','w')
     prod.write("""
+##################################################################################################
+# Product-page service
+##################################################################################################
 apiVersion: v1
 kind: Service
 metadata:
-  name: productpage
+  name: product-page
+  labels:
+    app: product-page
+    service: product-page
 spec:
   type: LoadBalancer
   ports:
-    - port: 9080
-      name: http
-      protocol: TCP
-      targetPort: 9080
+  - port: 9080
+    name: http
+  selector:
+    app: product-page
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: productpage
+  name: product-page-v1
+  labels:
+    app: product-page
+    version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: productpage
+      app: product-page
+      version: v1
   template:
     metadata:
       labels:
-        app: productpage
+        app: product-page
+        version: v1
     spec:
       containers:
-      - name: productpage
+      - name: product-page
         image: """+user+"""/product-page
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
+        securityContext:
+          runAsUser: 1000
+---
 """)
     prod.close()
 
     det = open ('details.yalm','w')
     det.write("""
+##################################################################################################
+# Details service
+##################################################################################################
 apiVersion: v1
 kind: Service
 metadata:
   name: details
+  labels:
+    app: details
+    service: details
 spec:
+  ports:
+  - port: 9080
+    name: http
   selector:
     app: details
-  ports:
-    - protocol: TCP
-      port: 9080
-      targetPort: 9080
----              
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: details
+  name: details-v1
+  labels:
+    app: details
+    version: v1
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: details
+      version: v1
   template:
     metadata:
       labels:
         app: details
+        version: v1
     spec:
       containers:
       - name: details
         image: """+user+"""/details
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
+        securityContext:
+          runAsUser: 1000
+---
 """)
     
     det.close()
