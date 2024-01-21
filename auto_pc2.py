@@ -162,11 +162,11 @@ def java2(version):
         lines = my_file.readlines()
         my_file.close()
         del lines[12]
-        lines.insert(12, 'ENV SERVICE_VERSION v2')
+        lines.insert(12, 'ENV SERVICE_VERSION v2\n')
         del lines[13]
-        lines.insert(13, 'ENV ENABLE_RATINGS true')
+        lines.insert(13, 'ENV ENABLE_RATINGS true\n')
         del lines[14]
-        lines.insert(14, 'ENV STAR_COLOR black')
+        lines.insert(14, 'ENV STAR_COLOR black\n')
         my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','w')
         my_file.writelines(lines)
         my_file.close()
