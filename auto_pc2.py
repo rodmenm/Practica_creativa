@@ -153,6 +153,39 @@ def java():
     os.system('cd practica_creativa2/bookinfo/src/reviews && docker run --rm -u root -v "$(pwd)":/home/gradle/project -w /home/gradle/project gradle:4.8.1 gradle clean build')
     os.system('docker build -t '+numGrupo+'/reviews ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
 
+def java2(version):
+    os.system('cd practica_creativa2/bookinfo/src/reviews && docker run --rm -u root -v "$(pwd)":/home/gradle/project -w /home/gradle/project gradle:4.8.1 gradle clean build')
+    if version == 'v1':    
+        os.system('docker build -t '+numGrupo+'/reviews ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
+    elif version == 'v2':
+        my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','r')
+        lines = my_file.readlines()
+        my_file.close()
+        del lines[12]
+        lines.insert(12, 'ENV SERVICE_VERSION v2')
+        del lines[13]
+        lines.insert(13, 'ENV ENABLE_RATINGS true')
+        del lines[14]
+        lines.insert(14, 'ENV STAR_COLOR black')
+        my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','w')
+        my_file.writelines(lines)
+        my_file.close()
+        os.system('docker build -t '+numGrupo+'/reviews ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
+    else:
+        my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','r')
+        lines = my_file.readlines()
+        my_file.close()
+        del lines[12]
+        lines.insert(12, 'ENV SERVICE_VERSION v3')
+        del lines[13]
+        lines.insert(13, 'ENV ENABLE_RATINGS true')
+        del lines[14]
+        lines.insert(14, 'ENV STAR_COLOR red')
+        my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','w')
+        my_file.writelines(lines)
+        my_file.close()
+        os.system('docker build -t '+numGrupo+'/reviews ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
+
 def node():
     Dockerfile = open('Dockerfile','w')
     Dockerfile.write("""
@@ -233,7 +266,9 @@ def Dockercompose(version):
 def kubernetes_comit(user):
     python()
     ruby()
-    java()
+    java2('v1')
+    java2('v2')
+    java2('v3')
     node()
     os.system("docker tag g32/ratings "+user+"/ratings")
     os.system("docker tag g32/reviews "+user+"/reviews")
@@ -244,7 +279,7 @@ def kubernetes_comit(user):
     os.system("docker push "+user+"/product-page")
     os.system("docker push "+user+"/details")
 
-def kubernetes_create(user):
+def kubernetes_create(user,version):
     os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-svc.yaml .")
     os.system("cp practica_creativa2/bookinfo/platform/kube/ratings.yaml .")
     os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-v1-deployment.yaml reviews.yaml")
@@ -355,16 +390,28 @@ spec:
 
     os.system('kubectl apply -f reviews-svc.yaml')
     os.system('kubectl apply -f ratings.yaml')
-    os.system('kubectl apply -f reviews.yaml')
     os.system('kubectl apply -f product-page.yaml')
     os.system('kubectl apply -f details.yalm')
+    if version == 'v2':
+        os.system('kubectl apply -f reviews-v2.yaml')
+    elif version == 'v3':
+        os.system('kubectl apply -f reviews-v3.yaml')
+    else:
+        os.system('kubectl apply -f reviews.yaml')
 
     
 
 
 
 #MAIN-------------------------------------------------------------------------------------------------------------------------------
-if (comand =="dockercompose"):
+if len(sys.argv) < 2:
+    print('Escriba "python3 auto_pc2.py MVPesada" para desplegar la pagina en una MV pesada')
+    print('Escriba "python3 auto_pc2.py docker" para desplegar la pagina con docker')
+    print('Escriba "python3 auto_pc2.py dockercompose" para desplegar la pagina con docker-compose')
+    print('Escriba un 3 argumento tras dockercompose para elegir la version')
+    print('Escriba "python3 auto_pc2.py kubernetes" para desplegar la pagina con kubernetes')
+
+elif (comand =="dockercompose"):
     if (len(sys.argv)==3):
         Dockercompose(sys.argv[2])
     else:
@@ -378,11 +425,10 @@ elif (comand =="kubernetescomit"):
         print('Logeate en docker empleando "docker login" y pasa a esta funcion tu nombre de usuario de esta forma "python3 auto_pc2.py kubernetescomit "tu_usuario" (sin comillas)')
 
 elif (comand =="kubernetescreate"):
-    if (len(sys.argv)==3):
-       kubernetes_create(sys.argv[2])
+    if (len(sys.argv)==4):
+       kubernetes_create(sys.argv[2],sys.argv[3])
     else:
-        print('Escribe "python3 auto_pc2.py kubernetescomit "tu_usuario"" (sin comillas), para desplegarlo')
-
+        print('Escribe "python3 auto_pc2.py kubernetescomit "tu_usuario" "version_de_reviews", para desplegarlo')
 
 elif len(sys.argv) != 2:
     print('El número de argumentos no es correcto. Escriba "python3 productpage_monolith.py help" para ver los argumentos en correctos')
