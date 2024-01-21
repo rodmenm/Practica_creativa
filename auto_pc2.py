@@ -401,7 +401,7 @@ spec:
     elif version == 'v3':
         os.system('kubectl apply -f reviews-v3.yaml')
     else:
-        os.system('kubectl apply -f reviews.yaml')
+        os.system('kubectl apply -f reviews-v1.yaml')
 
     
 
