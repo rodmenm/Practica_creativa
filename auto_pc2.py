@@ -37,14 +37,14 @@ def sust_line2(userb,version):
     my_file.writelines(lines)
     my_file.close()
 
-    my_fileb = open('reviews.yaml','r')
+    my_fileb = open('reviews-'+version+'.yaml','r')
     lines = my_fileb.readlines()
     my_fileb.close()
 
     del lines[21]
-    lines.insert(21, '        image: '+userb+'/reviews\n')
+    lines.insert(21, '        image: '+userb+'/reviews-'+version+'\n')
     
-    my_fileb = open('reviews.yaml','w')
+    my_fileb = open('reviews-'+version+'.yaml','w')
     my_fileb.writelines(lines)
     my_fileb.close()
 
@@ -154,7 +154,7 @@ def java():
     os.system('sudo docker build -t '+numGrupo+'/reviews ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
 
 def java2(version):
-    os.system('cd practica_creativa2/bookinfo/src/reviews && docker run --rm -u root -v "$(pwd)":/home/gradle/project -w /home/gradle/project gradle:4.8.1 gradle clean build')
+    os.system('cd practica_creativa2/bookinfo/src/reviews && sudo docker run --rm -u root -v "$(pwd)":/home/gradle/project -w /home/gradle/project gradle:4.8.1 gradle clean build')
     if version == 'v1':    
         os.system('sudo docker build -t '+numGrupo+'/reviews-v1 ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
     elif version == 'v2':
@@ -286,7 +286,7 @@ def kubernetes_comit(user):
 def kubernetes_create(user,version):
     os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-svc.yaml .")
     os.system("cp practica_creativa2/bookinfo/platform/kube/ratings.yaml .")
-    os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-v1-deployment.yaml reviews.yaml")
+    os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-v1-deployment.yaml reviews-"+version+".yaml")
 
     prod = open('product-page.yaml','w')
     prod.write("""
@@ -401,7 +401,7 @@ spec:
     elif version == 'v3':
         os.system('kubectl apply -f reviews-v3.yaml')
     else:
-        os.system('kubectl apply -f reviews.yaml')
+        os.system('kubectl apply -f reviews-v1.yaml')
 
     
 
