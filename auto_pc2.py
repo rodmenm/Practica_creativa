@@ -256,7 +256,7 @@ def Dockercompose(version):
         ratings = "true"
         star = "red"
     else:
-        print("Tomando version v1 por defeco")
+        print("Tomando version v3 por defecto")
     python()
     ruby()
     java()
