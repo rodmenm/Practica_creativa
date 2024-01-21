@@ -58,7 +58,7 @@ def MVPesada():
 
     sust_line()
 
-    os.system('python3 practica_creativa2/bookinfo/src/productpage/productpage_monolith.py 9080')
+    os.system('python3 practica_creativa2/bookinfo/src/productpage/productpage_monolith.py 3200')
 
 #Parte Docker---------------------------------------------------------------------------------------------------------------------------------------------
 def Docker():
