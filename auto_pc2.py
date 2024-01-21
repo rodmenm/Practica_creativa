@@ -147,16 +147,16 @@ EXPOSE 9080
 CMD ruby /opt/microservices/details.rb 9080
 """)
     Dockerfile.close()
-    os.system('docker build -t '+numGrupo+'/details .')
+    os.system('sudo docker build -t '+numGrupo+'/details .')
 
 def java():
-    os.system('cd practica_creativa2/bookinfo/src/reviews && docker run --rm -u root -v "$(pwd)":/home/gradle/project -w /home/gradle/project gradle:4.8.1 gradle clean build')
-    os.system('docker build -t '+numGrupo+'/reviews ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
+    os.system('cd practica_creativa2/bookinfo/src/reviews && sudo docker run --rm -u root -v "$(pwd)":/home/gradle/project -w /home/gradle/project gradle:4.8.1 gradle clean build')
+    os.system('sudo docker build -t '+numGrupo+'/reviews ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
 
 def java2(version):
     os.system('cd practica_creativa2/bookinfo/src/reviews && docker run --rm -u root -v "$(pwd)":/home/gradle/project -w /home/gradle/project gradle:4.8.1 gradle clean build')
     if version == 'v1':    
-        os.system('docker build -t '+numGrupo+'/reviews-v1 ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
+        os.system('sudo docker build -t '+numGrupo+'/reviews-v1 ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
     elif version == 'v2':
         my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','r')
         lines = my_file.readlines()
@@ -170,7 +170,7 @@ def java2(version):
         my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','w')
         my_file.writelines(lines)
         my_file.close()
-        os.system('docker build -t '+numGrupo+'/reviews-v2 ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
+        os.system('sudo docker build -t '+numGrupo+'/reviews-v2 ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
     else:
         my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','r')
         lines = my_file.readlines()
@@ -184,7 +184,7 @@ def java2(version):
         my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','w')
         my_file.writelines(lines)
         my_file.close()
-        os.system('docker build -t '+numGrupo+'/reviews-v3 ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
+        os.system('sudo docker build -t '+numGrupo+'/reviews-v3 ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
 
 def node():
     Dockerfile = open('Dockerfile','w')
@@ -212,7 +212,7 @@ EXPOSE 9080
 CMD node /opt/microservices/ratings.js 9080
 """)
     Dockerfile.close()
-    os.system('docker build -t '+numGrupo+'/ratings .')
+    os.system('sudo docker build -t '+numGrupo+'/ratings .')
     
 def yamnl(version,rating,star):
     Dockercomp = open('docker-compose.yml','w')
@@ -270,10 +270,12 @@ def kubernetes_comit(user):
     java2('v2')
     java2('v3')
     node()
-    os.system("docker tag g32/ratings "+user+"/ratings")
-    os.system("docker tag g32/reviews "+user+"/reviews")
-    os.system("docker tag g32/product-page "+user+"/product-page")
-    os.system("docker tag g32/details "+user+"/details")
+    os.system("sudo docker tag g32/ratings "+user+"/ratings")
+    os.system("sudo docker tag g32/reviews-v1 "+user+"/reviews-v1")
+    os.system("sudo docker tag g32/reviews-v2 "+user+"/reviews-v2")
+    os.system("sudo docker tag g32/reviews-v3 "+user+"/reviews-v3")
+    os.system("sudo docker tag g32/product-page "+user+"/product-page")
+    os.system("sudo docker tag g32/details "+user+"/details")
     os.system("sudo docker push "+user+"/ratings")
     os.system("sudo docker push "+user+"/reviews-v1")
     os.system("sudo docker push "+user+"/reviews-v2")
