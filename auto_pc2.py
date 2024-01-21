@@ -23,7 +23,7 @@ def sust_line():
     my_file.writelines(lines)
     my_file.close()
 
-def sust_line2(userb):
+def sust_line2(userb,version):
     my_file = open('ratings.yaml','r')
     lines = my_file.readlines()
     my_file.close()
@@ -42,7 +42,7 @@ def sust_line2(userb):
     my_fileb.close()
 
     del lines[21]
-    lines.insert(21, '        image: '+userb+'/reviews\n')
+    lines.insert(21, '        image: '+userb+'/reviews-'+version+'\n')
     
     my_fileb = open('reviews.yaml','w')
     my_fileb.writelines(lines)
@@ -286,7 +286,7 @@ def kubernetes_comit(user):
 def kubernetes_create(user,version):
     os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-svc.yaml .")
     os.system("cp practica_creativa2/bookinfo/platform/kube/ratings.yaml .")
-    os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-v1-deployment.yaml reviews.yaml")
+    os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-v1-deployment.yaml reviews-"+version+".yaml")
 
     prod = open('product-page.yaml','w')
     prod.write("""
@@ -390,7 +390,7 @@ spec:
     
     det.close()
 
-    sust_line2(user)
+    sust_line2(user,version)
 
     os.system('kubectl apply -f reviews-svc.yaml')
     os.system('kubectl apply -f ratings.yaml')
@@ -432,7 +432,7 @@ elif (comand =="kubernetescreate"):
     if (len(sys.argv)==4):
        kubernetes_create(sys.argv[2],sys.argv[3])
     else:
-        print('Escribe "python3 auto_pc2.py kubernetescomit "tu_usuario" "version_de_reviews", para desplegarlo')
+        print('Escribe "python3 auto_pc2.py kubernetescreate "tu_usuario" "version_de_reviews", para desplegarlo')
 
 elif len(sys.argv) != 2:
     print('El número de argumentos no es correcto. Escriba "python3 productpage_monolith.py help" para ver los argumentos en correctos')
