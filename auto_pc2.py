@@ -423,11 +423,12 @@ spec:
 
 #MAIN-------------------------------------------------------------------------------------------------------------------------------
 if len(sys.argv) < 2:
-    print('Escriba "python3 auto_pc2.py MVPesada" para desplegar la pagina en una MV pesada')
-    print('Escriba "python3 auto_pc2.py docker" para desplegar la pagina con docker')
-    print('Escriba "python3 auto_pc2.py dockercompose" para desplegar la pagina con docker-compose')
+    print('Escriba "python3 auto_pc2.py MVPesada" para desplegar la página en una MV pesada')
+    print('Escriba "python3 auto_pc2.py docker" para desplegar la página con docker')
+    print('Escriba "python3 auto_pc2.py dockercompose" para desplegar la página con docker-compose')
     print('Escriba un 3 argumento tras dockercompose para elegir la version')
-    print('Escriba "python3 auto_pc2.py kubernetes" para desplegar la pagina con kubernetes')
+    print('Escriba "python3 auto_pc2.py kubernetescomit" para subir las imagenes a dockerhub')
+    print('Escriba "python3 auto-pc2.py kubernetescreate" para desplegar la página con kubernetes"')
 
 elif (comand =="dockercompose"):
     if (len(sys.argv)==3):
@@ -457,11 +458,9 @@ else:
         Docker()
 
     elif (comand == "help"):
-        print('Escriba "python3 auto_pc2.py MVPesada" para desplegar la pagina en una MV pesada')
-        print('Escriba "python3 auto_pc2.py docker" para desplegar la pagina con docker')
-        print('Escriba "python3 auto_pc2.py dockercompose" para desplegar la pagina con docker-compose')
+        print('Escriba "python3 auto_pc2.py MVPesada" para desplegar la página en una MV pesada')
+        print('Escriba "python3 auto_pc2.py docker" para desplegar la página con docker')
+        print('Escriba "python3 auto_pc2.py dockercompose" para desplegar la página con docker-compose')
         print('Escriba un 3 argumento tras dockercompose para elegir la version')
-        print('Escriba "python3 auto_pc2.py kubernetes" para desplegar la pagina con kubernetes')
-
-
-
+        print('Escriba "python3 auto_pc2.py kubernetescomit" para subir las imagenes a dockerhub')
+        print('Escriba "python3 auto-pc2.py kubernetescreate" para desplegar la página con kubernetes"')
