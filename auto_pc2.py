@@ -6,6 +6,8 @@ directorio_actual = os.getcwd()
 if len(sys.argv)>=2:
     comand = sys.argv[1]
 
+os.system('sudo apt install git')
+os.system('ssh-keyscan github.com >> ~/.ssh/known_hosts')
 os.system('git clone https://github.com/CDPS-ETSIT/practica_creativa2.git')
 os.system('sudo apt install docker.io')
 os.system('sudo apt remove docker-compose -y && sudo apt autoremove')
@@ -50,11 +52,8 @@ def sust_line2(userb,version):
     my_fileb.close()
 
 #Parte MV Pesada--------------------------------------------------------------------------------------------------------------------------------------------
-def MVPesada():   
-    os.system('sudo apt install git')
+def MVPesada():
     os.system('sudo apt install python3-pip')
-    os.system('ssh-keyscan github.com >> ~/.ssh/known_hosts')
-    os.system('git clone https://github.com/CDPS-ETSIT/practica_creativa2.git')
     os.system('pip3 install -r practica_creativa2/bookinfo/src/productpage/requirements.txt')
 
     sust_line()
