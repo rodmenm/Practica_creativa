@@ -427,7 +427,7 @@ if len(sys.argv) < 2:
     print('Escriba "python3 auto_pc2.py dockercompose" para desplegar la página con docker-compose')
     print('Escriba un 3 argumento tras dockercompose para elegir la version')
     print('Escriba "python3 auto_pc2.py kubernetescomit" para subir las imagenes a dockerhub')
-    print('Escriba "python3 auto-pc2.py kubernetescreate "version_de_reviews"" (sin comillas) para desplegar la página con kubernetes y con la versión de reviews deseada')
+    print('Escriba "python3 auto-pc2.py kubernetescreate "usuario_imagenes_dockerhub" "version_de_reviews"" (sin comillas) para desplegar la página con kubernetes y con la versión de reviews deseada')
 
 elif (comand =="dockercompose"):
     if (len(sys.argv)==3):
@@ -446,7 +446,7 @@ elif (comand =="kubernetescreate"):
     if (len(sys.argv)==4):
        kubernetes_create(sys.argv[2],sys.argv[3])
     else:
-        print('Escribe "python3 auto_pc2.py kubernetescreate "tu_usuario" "version_de_reviews", para desplegarlo')
+        print('Escribe "python3 auto_pc2.py kubernetescreate "usuario_imagenes_dockerhub" "version_de_reviews", para desplegarlo')
 
 elif len(sys.argv) != 2:
     print('El número de argumentos no es correcto. Escriba "python3 productpage_monolith.py help" para ver los argumentos en correctos')
@@ -462,4 +462,4 @@ else:
         print('Escriba "python3 auto_pc2.py dockercompose" para desplegar la página con docker-compose')
         print('Escriba un 3 argumento tras dockercompose para elegir la version')
         print('Escriba "python3 auto_pc2.py kubernetescomit" para subir las imagenes a dockerhub')
-        print('Escriba "python3 auto-pc2.py kubernetescreate "version_de_reviews"" (sin comillas) para desplegar la página con kubernetes y con la versión de reviews deseada')
+        print('Escriba "python3 auto-pc2.py kubernetescreate "usuario_imagenes_dockerhub" "version_de_reviews"" (sin comillas) para desplegar la página con kubernetes y con la versión de reviews deseada')
