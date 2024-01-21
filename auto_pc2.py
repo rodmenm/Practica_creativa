@@ -52,12 +52,13 @@ def sust_line2(userb,version):
 def MVPesada():   
     os.system('sudo apt install git')
     os.system('sudo apt install python3-pip')
+    os.system('ssh-keyscan github.com >> ~/.ssh/known_hosts')
     os.system('git clone https://github.com/CDPS-ETSIT/practica_creativa2.git')
     os.system('pip3 install -r practica_creativa2/bookinfo/src/productpage/requirements.txt')
 
     sust_line()
 
-    os.system('python3 practica_creativa2/bookinfo/src/productpage/productpage_monolith.py 3200')
+    os.system('python3 practica_creativa2/bookinfo/src/productpage/productpage_monolith.py 9080')
 
 #Parte Docker---------------------------------------------------------------------------------------------------------------------------------------------
 def Docker():
