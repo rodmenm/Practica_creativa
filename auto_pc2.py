@@ -37,7 +37,7 @@ def sust_line2(userb,version):
     my_file.writelines(lines)
     my_file.close()
 
-    my_fileb = open('reviews'+version+'.yaml','r')
+    my_fileb = open('reviews-'+version+'.yaml','r')
     lines = my_fileb.readlines()
     my_fileb.close()
 
