@@ -37,14 +37,14 @@ def sust_line2(userb,version):
     my_file.writelines(lines)
     my_file.close()
 
-    my_fileb = open('reviews-'+version+'.yaml','r')
+    my_fileb = open('reviews.yaml','r')
     lines = my_fileb.readlines()
     my_fileb.close()
 
     del lines[21]
-    lines.insert(21, '        image: '+userb+'/reviews-'+version+'\n')
+    lines.insert(21, '        image: '+userb+'/reviews\n')
     
-    my_fileb = open('reviews-'+version+'.yaml','w')
+    my_fileb = open('reviews.yaml','w')
     my_fileb.writelines(lines)
     my_fileb.close()
 
@@ -162,11 +162,11 @@ def java2(version):
         lines = my_file.readlines()
         my_file.close()
         del lines[12]
-        lines.insert(12, 'ENV SERVICE_VERSION v2\n')
+        lines.insert(12, 'ENV SERVICE_VERSION=v2\n')
         del lines[13]
-        lines.insert(13, 'ENV ENABLE_RATINGS true\n')
+        lines.insert(13, 'ENV ENABLE_RATINGS=true\n')
         del lines[14]
-        lines.insert(14, 'ENV STAR_COLOR black\n')
+        lines.insert(14, 'ENV STAR_COLOR=black\n')
         my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','w')
         my_file.writelines(lines)
         my_file.close()
@@ -286,7 +286,7 @@ def kubernetes_comit(user):
 def kubernetes_create(user,version):
     os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-svc.yaml .")
     os.system("cp practica_creativa2/bookinfo/platform/kube/ratings.yaml .")
-    os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-v1-deployment.yaml reviews-"+version+".yaml")
+    os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-v1-deployment.yaml reviews.yaml")
 
     prod = open('product-page.yaml','w')
     prod.write("""
@@ -401,7 +401,7 @@ spec:
     elif version == 'v3':
         os.system('kubectl apply -f reviews-v3.yaml')
     else:
-        os.system('kubectl apply -f reviews-v1.yaml')
+        os.system('kubectl apply -f reviews.yaml')
 
     
 
