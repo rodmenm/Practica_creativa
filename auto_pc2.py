@@ -156,7 +156,7 @@ def java():
 def java2(version):
     os.system('cd practica_creativa2/bookinfo/src/reviews && docker run --rm -u root -v "$(pwd)":/home/gradle/project -w /home/gradle/project gradle:4.8.1 gradle clean build')
     if version == 'v1':    
-        os.system('docker build -t '+numGrupo+'/reviews ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
+        os.system('docker build -t '+numGrupo+'/reviews-v1 ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
     elif version == 'v2':
         my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','r')
         lines = my_file.readlines()
@@ -170,7 +170,7 @@ def java2(version):
         my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','w')
         my_file.writelines(lines)
         my_file.close()
-        os.system('docker build -t '+numGrupo+'/reviews ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
+        os.system('docker build -t '+numGrupo+'/reviews-v2 ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
     else:
         my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','r')
         lines = my_file.readlines()
@@ -184,7 +184,7 @@ def java2(version):
         my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','w')
         my_file.writelines(lines)
         my_file.close()
-        os.system('docker build -t '+numGrupo+'/reviews ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
+        os.system('docker build -t '+numGrupo+'/reviews-v3 ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
 
 def node():
     Dockerfile = open('Dockerfile','w')
@@ -274,10 +274,12 @@ def kubernetes_comit(user):
     os.system("docker tag g32/reviews "+user+"/reviews")
     os.system("docker tag g32/product-page "+user+"/product-page")
     os.system("docker tag g32/details "+user+"/details")
-    os.system("docker push "+user+"/ratings")
-    os.system("docker push "+user+"/reviews")
-    os.system("docker push "+user+"/product-page")
-    os.system("docker push "+user+"/details")
+    os.system("sudo docker push "+user+"/ratings")
+    os.system("sudo docker push "+user+"/reviews-v1")
+    os.system("sudo docker push "+user+"/reviews-v2")
+    os.system("sudo docker push "+user+"/reviews-v3")
+    os.system("sudo docker push "+user+"/product-page")
+    os.system("sudo docker push "+user+"/details")
 
 def kubernetes_create(user,version):
     os.system("cp practica_creativa2/bookinfo/platform/kube/reviews-svc.yaml .")
