@@ -7,7 +7,8 @@ if len(sys.argv)>=2:
     comand = sys.argv[1]
 
 os.system('git clone https://github.com/CDPS-ETSIT/practica_creativa2.git')
-
+os.system('sudo apt install docker.io')
+os.system('sudo apt remove docker-compose -y && sudo apt autoremove')
 
 def sust_line():
     my_file = open('practica_creativa2/bookinfo/src/productpage/templates/index.html','r')
@@ -62,7 +63,6 @@ def MVPesada():
 
 #Parte Docker---------------------------------------------------------------------------------------------------------------------------------------------
 def Docker():
-    os.system('sudo apt install docker.io')
     script = open('script.py','w')
     script.write("""
 import os
@@ -157,7 +157,19 @@ def java():
 
 def java2(version):
     os.system('cd practica_creativa2/bookinfo/src/reviews && sudo docker run --rm -u root -v "$(pwd)":/home/gradle/project -w /home/gradle/project gradle:4.8.1 gradle clean build')
-    if version == 'v1':    
+    if version == 'v1':
+        my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','r')
+        lines = my_file.readlines()
+        my_file.close()
+        del lines[12]
+        lines.insert(12, 'ENV SERVICE_VERSION=v1\n')
+        del lines[13]
+        lines.insert(13, 'ENV ENABLE_RATINGS=false\n')
+        del lines[14]
+        lines.insert(14, 'ENV STAR_COLOR=black\n')
+        my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','w')
+        my_file.writelines(lines)
+        my_file.close()    
         os.system('sudo docker build -t '+numGrupo+'/reviews-v1 ./practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg')
     elif version == 'v2':
         my_file = open('practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg/Dockerfile','r')
@@ -245,7 +257,7 @@ services:
 
 
 def Dockercompose(version):
-    os.system('sudo apt install docker.io')
+    os.system('sudo apt install docker-compose')
     if (version == "v1"):
         ratings = "false"
         star = "black"
