@@ -102,8 +102,8 @@ CMD python3 script.py ; python3 practica_creativa2/bookinfo/src/productpage/prod
 """)
     Dockerfile.close()
 
-    os.system('docker build -t '+numGrupo+'/product-page .')
-    os.system('docker run --name '+numGrupo+'-product-page -p 9080:9080 -e GRUPO_NUMERO='+numGrupo+' '+numGrupo+'/product-page')
+    os.system('sudo docker build -t '+numGrupo+'/product-page .')
+    os.system('sudo docker run --name '+numGrupo+'-product-page -p 9080:9080 -e GRUPO_NUMERO='+numGrupo+' '+numGrupo+'/product-page')
 
 #Parte Docker-compose-----------------------------------------------------------------------------------------------------------------------------------------
 def python():
