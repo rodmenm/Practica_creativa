@@ -44,7 +44,7 @@ def sust_line2(userb,version):
     del lines[21]
     lines.insert(21, '        image: '+userb+'/reviews-'+version+'\n')
     
-    my_fileb = open('reviews'+version+'.yaml','w')
+    my_fileb = open('reviews-'+version+'.yaml','w')
     my_fileb.writelines(lines)
     my_fileb.close()
 
