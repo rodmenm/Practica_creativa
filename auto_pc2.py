@@ -62,6 +62,7 @@ def MVPesada():
 
 #Parte Docker---------------------------------------------------------------------------------------------------------------------------------------------
 def Docker():
+    os.system('sudo apt install docker.io')
     script = open('script.py','w')
     script.write("""
 import os
@@ -244,7 +245,7 @@ services:
 
 
 def Dockercompose(version):
-
+    os.system('sudo apt install docker.io')
     if (version == "v1"):
         ratings = "false"
         star = "black"
@@ -261,7 +262,7 @@ def Dockercompose(version):
     java()
     node()
     yamnl(version,ratings,star)
-    os.system("docker-compose up")
+    os.system("sudo docker-compose up")
 
 #Parte Kubernetes--------------------------------------------------------------------------------------------------------------------
 def kubernetes_comit(user):
