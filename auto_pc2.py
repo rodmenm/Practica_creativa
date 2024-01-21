@@ -125,7 +125,7 @@ CMD python3 practica_creativa2/bookinfo/src/productpage/productpage.py 9080
 
 """)
     Dockerfile.close()
-    os.system('docker build -t '+numGrupo+'/product-page .')
+    os.system('sudo docker build -t '+numGrupo+'/product-page .')
     
 def ruby():
     Dockerfile = open('Dockerfile','w')
