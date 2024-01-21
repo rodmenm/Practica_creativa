@@ -427,7 +427,7 @@ if len(sys.argv) < 2:
     print('Escriba "python3 auto_pc2.py dockercompose" para desplegar la página con docker-compose')
     print('Escriba un 3 argumento tras dockercompose para elegir la version')
     print('Escriba "python3 auto_pc2.py kubernetescomit" para subir las imagenes a dockerhub')
-    print('Escriba "python3 auto-pc2.py kubernetescreate" para desplegar la página con kubernetes"')
+    print('Escriba "python3 auto-pc2.py kubernetescreate "version_de_reviews"" (sin comillas) para desplegar la página con kubernetes y con la versión de reviews deseada')
 
 elif (comand =="dockercompose"):
     if (len(sys.argv)==3):
@@ -440,7 +440,7 @@ elif (comand =="kubernetescomit"):
     if (len(sys.argv)==3):
        kubernetes_comit(sys.argv[2])
     else:
-        print('Logeate en docker empleando "docker login" y pasa a esta funcion tu nombre de usuario de esta forma "python3 auto_pc2.py kubernetescomit "tu_usuario" (sin comillas)')
+        print('Logeate en docker empleando "docker login" y pasa a esta funcion tu nombre de usuario de esta forma "python3 auto_pc2.py kubernetescomit "tu_usuario"" (sin comillas)')
 
 elif (comand =="kubernetescreate"):
     if (len(sys.argv)==4):
@@ -462,4 +462,4 @@ else:
         print('Escriba "python3 auto_pc2.py dockercompose" para desplegar la página con docker-compose')
         print('Escriba un 3 argumento tras dockercompose para elegir la version')
         print('Escriba "python3 auto_pc2.py kubernetescomit" para subir las imagenes a dockerhub')
-        print('Escriba "python3 auto-pc2.py kubernetescreate" para desplegar la página con kubernetes"')
+        print('Escriba "python3 auto-pc2.py kubernetescreate "version_de_reviews"" (sin comillas) para desplegar la página con kubernetes y con la versión de reviews deseada')
